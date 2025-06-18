@@ -23,16 +23,27 @@ public class Artist {
     private String stageName;
     @Column(name = "location")
     private String location;
+    @Column(name = "status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Artist() {
     }
 
-    public Artist(String fName, String lName, String genre, String stageName, String location) {
+    public Artist(String fName, String lName, String genre, String stageName, String location, String status) {
         this.fName = fName;
         this.lName = lName;
         this.genre = genre;
         this.stageName = stageName;
         this.location = location;
+        this.status = status;
     }
 
     public Long getId() {

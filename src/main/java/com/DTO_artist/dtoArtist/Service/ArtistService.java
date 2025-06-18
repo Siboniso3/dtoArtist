@@ -1,5 +1,4 @@
 package com.DTO_artist.dtoArtist.Service;
-
 import com.DTO_artist.dtoArtist.Model.Artist;
 import com.DTO_artist.dtoArtist.Repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +37,10 @@ public class ArtistService {
 
        if(artist.getId() == id){
            artist.setfName(artist.getfName());
-           artist.setfName(artist.getlName());
-           artist.setfName(artist.getGenre());
-           artist.setfName(artist.getStageName());
-           artist.setfName(artist.getLocation());
+           artist.setlName(artist.getlName());
+           artist.setGenre(artist.getGenre());
+           artist.setStageName(artist.getStageName());
+           artist.setLocation(artist.getLocation());
            return artistRepository.save(artist);
        }
         return null;
