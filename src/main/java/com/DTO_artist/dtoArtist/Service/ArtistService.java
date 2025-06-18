@@ -1,21 +1,30 @@
 package com.DTO_artist.dtoArtist.Service;
 import com.DTO_artist.dtoArtist.Model.Artist;
+import com.DTO_artist.dtoArtist.Model.ArtistDto;
 import com.DTO_artist.dtoArtist.Repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
     @Autowired
  private ArtistRepository artistRepository;
 
-    public List<Artist> findAllArtist(){
-       List<Artist> artists = artistRepository.findAll();
-        return artists;
+    public List<ArtistDto> findAllArtist(){
+       return artistRepository.findAll().stream().map(
+               artist -> new ArtistDto(
+                   artist.getId(),
+                   artist.getfName(),
+                   artist.getlName(),
+                   artist.getGenre(),
+                   artist.getStageName()
+               )
+       ).collect(Collectors.toList());
+
     }
     public Artist addNewArtist(Artist artist){
         if(artistRepository !=null){
@@ -24,9 +33,17 @@ public class ArtistService {
         return null;
     }
 
-    public Optional<Artist> getArtist(Long id) {
-        Optional<Artist> artist = Optional.of(artistRepository.findById(id).get());
-        return artist;
+    public List<ArtistDto> getArtist(Long id) {
+       return Optional.of(artistRepository.findById(id).get()).stream().map(
+               artist -> new ArtistDto(
+                       artist.getId(),
+                       artist.getfName(),
+                       artist.getlName(),
+                       artist.getGenre(),
+                       artist.getStageName()
+               )
+       ).collect(Collectors.toList());
+
     }
     public void deleteArtist(Long id){
         this.artistRepository.deleteById(id);

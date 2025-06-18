@@ -1,12 +1,12 @@
 package com.DTO_artist.dtoArtist.Controller;
 
 import com.DTO_artist.dtoArtist.Model.Artist;
+import com.DTO_artist.dtoArtist.Model.ArtistDto;
 import com.DTO_artist.dtoArtist.Service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/v1/api/artist")
@@ -19,11 +19,11 @@ public class ArtistController {
         return artistService.addNewArtist(artist);
     }
     @GetMapping("")
-    public List<Artist> getALLArtist(){
+    public List<ArtistDto> getALLArtist(){
         return this.artistService.findAllArtist();
     }
     @GetMapping("/{id}")
-    public Optional<Artist> getSpecific(@PathVariable Long id){
+    public List<ArtistDto> getSpecific(@PathVariable Long id){
         return this.artistService.getArtist(id);
     }
     @DeleteMapping("/{id}")
